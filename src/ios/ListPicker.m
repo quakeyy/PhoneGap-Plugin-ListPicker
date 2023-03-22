@@ -56,7 +56,19 @@
     [buttons addObject:flexSpace];
     UILabel *label =[[UILabel alloc] initWithFrame:CGRectMake(0, 0, 180, 30)];
     [label setTextAlignment:NSTextAlignmentCenter];
-    [label setTextColor: (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) ? [UIColor blackColor] : [UIColor whiteColor]];
+    if (@available(iOS 12.0, *)) {
+        switch (UIScreen.mainScreen.traitCollection.userInterfaceStyle) {
+            case UIUserInterfaceStyleDark:
+                [label setTextColor: (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) ? [UIColor whiteColor] : [UIColor whiteColor]];
+                break;
+            case UIUserInterfaceStyleLight:
+            case UIUserInterfaceStyleUnspecified:
+                [label setTextColor: (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) ? [UIColor blackColor] : [UIColor blackColor]];
+                break;
+            default:
+                break;
+        }
+    }
     [label setFont: [UIFont boldSystemFontOfSize:16]];
     [label setBackgroundColor:[UIColor clearColor]];
      label.text = title;

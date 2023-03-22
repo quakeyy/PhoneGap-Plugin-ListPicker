@@ -83,7 +83,20 @@
     // Initialize the View that should conain the toolbar and picker
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.viewSize.width, 260)];
     if(NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1) {
-      [view setBackgroundColor:[UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.0]];
+      //[view setBackgroundColor:[UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.0]];
+      if (@available(iOS 12.0, *)) { 
+	      switch (UIScreen.mainScreen.traitCollection.userInterfaceStyle) { 
+		      case UIUserInterfaceStyleDark: 
+			      [view setBackgroundColor:[UIColor colorWithRed:0.22 green:0.22 blue:0.22 alpha:1.0]]; 
+			      break; 
+		      case UIUserInterfaceStyleLight: 
+		      case UIUserInterfaceStyleUnspecified: 
+			      [view setBackgroundColor:[UIColor colorWithRed:0.97 green:0.97 blue:0.97 alpha:1.0]]; 
+			      break; 
+		      default: 
+			      break; 
+	      } 
+      }
     }
     [view addSubview: toolbar];
     
